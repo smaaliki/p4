@@ -17,10 +17,11 @@ return [
     |
      */
     'nav' => [
-        '/welcome' => 'Home',
-        '/features' => 'Features',
-        '/managecc' => 'Manage CC',
-        '/calculators' => 'Calculators',
+        '/' => 'Home',
+        '/ccs' => 'Our CCs',
+        '/manageCCs' => 'Manage CCs',
+        /*'/employees' => 'Employees',*/
+/*        '/calculators' => 'Calculators',*/
         '/contact' => 'Contact Us',
     ],
 

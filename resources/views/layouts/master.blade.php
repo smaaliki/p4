@@ -1,21 +1,24 @@
 <!doctype html>
 <html>
 <head>
-    <title>@yield('title', 'Some Title')</title>
+    <title>@yield('title', 'CCMS 1.0')</title>
     <meta charset='utf-8'>
 
     <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'>
-    <link href='css/main.css' type='text/css' rel='stylesheet'>
-
+    <link href='/css/main.css' type='text/css' rel='stylesheet'>
+    @stack('script')
     @stack('head')
 </head>
 <body>
 
+@if(session('alert'))
+    <div class='flashAlert'>{{ session('alert') }}</div>
+@endif
+
 <header>
     <div class='logo'>
-        <a href='/'><img src='images/logo.jpg' id='logo' alt='Entity  Logo'></a>
-        <div id='hdrtitle'><?=config('app.name')?></div>
+        <a href='/'><img src='/images/logo.png' id='logo' alt='Contact Center Management System Logo'></a>
     </div>
     <div class='username'>Samer Maaliki</div>
     <div class='navigation'>

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    <?=config('app.name')?> - Home
+    Home
 @endsection
 
 @section('content')
@@ -12,4 +12,10 @@
     <p>Users wishing to use this system will need to request an account through the contact us page.
     </p>
 
+    <h2>Features</h2>
+    <h3>Calculators</h3>
+    <p>These are our features...</p>
+
+    <h3>Agent Management</h3>
+    <p>These are our features...</p>
 @endsection
