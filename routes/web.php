@@ -30,13 +30,21 @@ Route::post('/contact',  'ContactController@mailToAdmin');
 Route::get('/ccs', 'ContactCentersController@index');
 Route::get('/manageCCs', 'ContactCentersController@manageCCs');
 
-/*CC - Create */
+/* CC - Create */
 Route::get('/manageCCs/create', 'ContactCentersController@create');
 Route::post('/manageCCs/store', 'ContactCentersController@store');
 
-/*CC - Edit */
+/* CC - Edit */
 Route::get('/manageCCs/{id}/edit', 'ContactCentersController@edit');
 Route::put('/manageCCs/{id}', 'ContactCentersController@update');
 
-/*CC - Delete */
+/* CC - Delete */
 Route::get('/manageCCs/{id}/delete', 'ContactCentersController@remove');
+
+/* Employees */
+Route::get('/employees', 'EmployeeController@index');
+
+/* Employees - Edit */
+Route::get('/manageEmployees/{id}/edit', 'EmployeeController@edit');
+Route::put('/manageEmployees/{id}', 'EmployeeController@update');
+

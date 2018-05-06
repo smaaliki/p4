@@ -4,6 +4,11 @@ Phone by Tom Walsh from the Noun Project
 add by throwaway icons from the Noun Project
 edit by throwaway icons from the Noun Project
 
+https://dev.to/rizwan_saquib/laravel-contact-form-with-email
+
+For form elements:
+https://getbootstrap.com/docs/4.0/components/forms/
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">

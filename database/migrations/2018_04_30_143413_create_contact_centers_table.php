@@ -18,7 +18,7 @@ class CreateContactCentersTable extends Migration
             $table->timestamps();
 
             $table->string('name');
-            $table->string('street_address')->nullable();;
+            $table->string('street_address')->nullable();
             $table->integer('emirate');
             $table->string('phone_number');
         });

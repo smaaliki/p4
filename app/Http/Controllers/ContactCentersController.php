@@ -11,11 +11,6 @@ class ContactCentersController extends Controller
     {
         $ccs = ContactCenter::orderBy('name')->get();
         $emirates = [1 => 'Abu Dhabi', 2 => 'Ajman', 3 => 'Dubai', 4 => 'Fujairah', 5 => 'Ras Al Kahimah', 6 => 'Sharjah', 7 => 'Umm Al Quwain',];
-        # Query the database to get the last 3 books added
-        # $newBooks = Book::latest()->limit(3)->get();
-
-        # [Better] Query the existing Collection to get the last 3 books added
-        #$newBooks = $ccs->sortByDesc('created_at')->take(3);
 
         return view('contactcenters.index')->with([
             'ccs' => $ccs,
@@ -55,7 +50,7 @@ class ContactCentersController extends Controller
             'phoneNumber' => 'required',
         ]);
 
-        # Save the book to the database
+        # Save the contact center to the database
         $cc = new ContactCenter();
         $cc->name = $request->ccName;
         $cc->street_address = $request->address;
@@ -64,9 +59,9 @@ class ContactCentersController extends Controller
         $cc->save();
 
         # Logging code just as proof of concept that this method is being invoked
-        # Log::info('Add the book ' . $cc->title);
+        # Log::info('Add the contact center ' . $cc->title);
 
-        # Send the user back to the page to add a book; include the title as part of the redirect
+        # Send the user back to the page to add a contact center; include the title as part of the redirect
         # so we can display a confirmation message on that page
         return redirect('/manageCCs/create')->with([
             'alert' => 'The contact center ' . $cc->name . ' was added.'
@@ -74,24 +69,23 @@ class ContactCentersController extends Controller
     }
 
     /**
-     * Show the form to edit an existing book
-     * GET /books/{id}/edit
+     * Show the form to edit an existing contact center
      */
     public function edit($id)
     {
-        # Find the book the visitor is requesting to edit
+        # Find the contact center the visitor is requesting to edit
         $cc = ContactCenter::find($id);
 
         $emirates = [1 => 'Abu Dhabi', 2 => 'Ajman', 3 => 'Dubai', 4 => 'Fujairah', 5 => 'Ras Al Kahimah', 6 => 'Sharjah', 7 => 'Umm Al Quwain',];
 
-        # Handle the case where we can't find the given book
+        # Handle the case where we can't find the given contact center
         if (!$cc) {
             return redirect('/manageCCs')->with(
                 ['alert' => 'Contact Center ' . $id . ' not found.']
             );
         }
 
-        # Show the book edit form
+        # Show the contact center edit form
         return view('contactcenters.edit')->with([
             'cc' => $cc,
             'emirates' => $emirates,
@@ -99,8 +93,8 @@ class ContactCentersController extends Controller
     }
 
     /**
-     * Process the form to edit an existing book
-     * PUT /books/{id}
+     * Process the form to edit an existing contact center
+     * PUT /contact center/{id}
      */
     public function update(Request $request, $id)
     {
@@ -109,7 +103,7 @@ class ContactCentersController extends Controller
             'phoneNumber' => 'required',
         ]);
 
-        # Fetch the book we want to update
+        # Fetch the contact center we want to update
         $cc = ContactCenter::find($id);
 
         # Update data
