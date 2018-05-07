@@ -53,23 +53,26 @@
         </div>
         @include('modules.error-field', ['field' => 'birthYear'])
 
-        <div class="form-check form-check-inline">
-            <input class="form-check-input"
-                   type="radio"
-                   name="gender"
-                   id="inlineRadio1"
-                   value='1' {{ old('gender', $employee->gender)? 'checked':'' }}>
-            <label class="form-check-label" for="inlineRadio1">Female</label>
+        <div class="form-group row">
+            <label class='col-sm-12 col-form-label'>Gender</label>
+            <div class="col-sm-2 form-check form-check-inline">
+                <input class="form-check-input"
+                       type="radio"
+                       name="gender"
+                       id="inlineRadio1"
+                       value='1' {{ old('gender', $employee->gender)? 'checked':'' }}>
+                <label class="form-check-label" for="inlineRadio1">Female</label>
+            </div>
+            <div class="col-sm-2 form-check form-check-inline">
+                <input class="form-check-input"
+                       type="radio"
+                       name="gender"
+                       id="inlineRadio2"
+                       value='0' {{ old('gender', $employee->gender)? '':'checked' }}>
+                <label class="form-check-label" for="inlineRadio2">Male</label>
+            </div>
         </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input"
-                   type="radio"
-                   name="gender"
-                   id="inlineRadio2"
-                   value='0' {{ old('gender', $employee->gender)? '':'checked' }}>
-            <label class="form-check-label" for="inlineRadio2">Male</label>
-        </div>
-
+        <!-- Todo: W3 validator does not like the date input element as it is not supported by some browsers, including Safari.  We should use a polyfill input type. -->
         <div class="form-group row">
             <label class='col-sm-3 col-form-label' for='employmentDate'>Employment Date *</label>
             <div class='col-sm-10'>

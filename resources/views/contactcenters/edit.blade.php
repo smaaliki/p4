@@ -18,23 +18,32 @@
         </div>
 
         <div class="form-group row">
-            <label class='col-sm-3 col-form-label' for='ccName'>Name *</label>
+            <label class='col-sm-10 col-form-label' for='ccName'>Name *</label>
             <div class='col-sm-10'>
-                <input type='text' class='form-control' name='ccName' id='ccName' value='{{ old('ccName', $cc->name) }}'>
+                <input type='text'
+                       class='form-control'
+                       name='ccName'
+                       id='ccName'
+                       value='{{ old('ccName', $cc->name) }}'>
             </div>
-            @include('modules.error-field', ['field' => 'ccName'])
+            <div class='col-sm-10'>
+                @include('modules.error-field', ['field' => 'ccName'])
+            </div>
         </div>
 
         <div class="form-group row">
-            <label class='col-sm-3 col-form-label' for='address'>Address</label>
+            <label class='col-sm-10 col-form-label' for='address'>Address</label>
             <div class='col-sm-10'>
-                <input type='text' class='form-control' name='address' id='address' value='{{ old('address', $cc->street_address) }}'>
+                <input type='text'
+                       class='form-control'
+                       name='address'
+                       id='address'
+                       value='{{ old('address', $cc->street_address) }}'>
             </div>
-            @include('modules.error-field', ['field' => 'address'])
         </div>
 
         <div class="form-group row">
-            <label class='col-sm-3 col-form-label' for='emirate'>District *</label>
+            <label class='col-sm-10 col-form-label' for='emirate'>District</label>
             <div class='col-sm-10'>
                 <select id='emirate' name='emirate' class='form-control'>
                     @foreach($emirates as $numeric => $string)
@@ -42,11 +51,10 @@
                     @endforeach
                 </select>
             </div>
-            @include('modules.error-field', ['field' => 'emirate'])
         </div>
 
         <div class="form-group row">
-            <label class='col-sm-3 col-form-label' for='phoneNumber'>Phone Number *</label>
+            <label class='col-sm-10 col-form-label' for='phoneNumber'>Phone Number *</label>
             <div class='col-sm-10'>
                 <input type='text'
                        class='form-control'
@@ -55,7 +63,9 @@
                        id='phoneNumber'
                        value='{{ old('phoneNumber', $cc->phone_number) }}'>
             </div>
-            @include('modules.error-field', ['field' => 'phoneNumber'])
+            <div class='col-sm-10'>
+                @include('modules.error-field', ['field' => 'phoneNumber'])
+            </div>
         </div>
 
         <button type='submit' class='btn btn-primary'>Save</button>

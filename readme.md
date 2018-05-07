@@ -9,6 +9,9 @@ https://dev.to/rizwan_saquib/laravel-contact-form-with-email
 For form elements:
 https://getbootstrap.com/docs/4.0/components/forms/
 
+For addresing the date input support:
+https://codepen.io/mikedryan/pen/EjWNKj
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">

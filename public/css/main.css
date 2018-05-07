@@ -183,3 +183,12 @@ ul.alert {
     border-color: #ebccd1;
     text-align: center;
 }
+
+
+input::-webkit-calendar-picker-indicator{
+    display: none;
+}
+
+input[type="date"]::-webkit-input-placeholder{
+    visibility: hidden !important;
+}
