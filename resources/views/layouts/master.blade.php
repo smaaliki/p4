@@ -1,7 +1,7 @@
 <!doctype html>
-<html>
+<html lang='en'>
 <head>
-    <title>@yield('title', 'CCMS 1.0')</title>
+    <title>@yield('title', 'CCMS')</title>
     <meta charset='utf-8'>
 
     <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>

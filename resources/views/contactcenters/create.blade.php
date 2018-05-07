@@ -37,7 +37,7 @@
             <div class='col-sm-10'>
                 <select id='emirate' name='emirate' class='form-control'>
                     @foreach($emirates as $numeric => $string)
-                        <option value='{{ $numeric }}' {{ (old('emirate', $numeric) == $numeric) ? 'SELECTED' : '' }}>{{ $string }}</option>
+                        <option value='{{ $numeric }}' {{ (old('emirate', '3') == $numeric) ? 'SELECTED' : '' }}>{{ $string }}</option>
                     @endforeach
                 </select>
             </div>

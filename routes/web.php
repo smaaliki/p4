@@ -44,7 +44,14 @@ Route::get('/manageCCs/{id}/delete', 'ContactCentersController@remove');
 /* Employees */
 Route::get('/employees', 'EmployeeController@index');
 
+/* CC - Create */
+Route::get('/manageEmployees/create', 'EmployeeController@create');
+Route::post('/manageEmployees/store', 'EmployeeController@store');
+
 /* Employees - Edit */
 Route::get('/manageEmployees/{id}/edit', 'EmployeeController@edit');
 Route::put('/manageEmployees/{id}', 'EmployeeController@update');
+
+/* Employees - Delete */
+Route::get('/manageEmployees/{id}/delete', 'EmployeeController@remove');
 

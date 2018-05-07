@@ -132,7 +132,6 @@ footer {
 }
 .phone_num {
     color:orangered;
-
 }
 
 .phone_num:before {
@@ -164,4 +163,23 @@ footer {
 .actions_icon {
     width: 25px;
     height: 25px;
+}
+
+.alert {
+    margin-top: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+ul.alert {
+    list-style-type:none;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    text-align: center;
 }

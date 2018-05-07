@@ -32,23 +32,23 @@
                     <td>{{ $employee->birth_year }}</td>
                     <td>{{ $employee->employment_date }}</td>
                     <td>{{ $employee->termination_date }}</td>
-                    <td id='actions_column'>
+                    <td>
                         <a href='/manageEmployees/{{ $employee->id }}/edit'><img class='actions_icon' src='/images/edit.png' alt='Edit Employee'></a>
-                        <a href='/manageEmployees/{{ $employee->id }}/deactivate'><img class='actions_icon' src='/images/delete.png' alt='Deactivate Employee'></a>  <!-- Todo: Replace with a deactivate icon -->
+                        <a href='/manageEmployees/{{ $employee->id }}/delete'><img class='actions_icon' src='/images/delete.png' alt='Deactivate Employee'></a>  <!-- Todo: Replace with a deactivate icon -->
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
     @endif
-<!--    <a class='add_new_cc' href='/manageEmployees/create'>Add New Employee</a>-->
+    <a class='add_new_cc' href='/manageEmployees/create'>Add New Employee</a>
 @endsection
 
 @push('script')
     <link href='/css/theme.grey.min.css' type='text/css' rel='stylesheet'>
     <script src="/js/jquery-3.2.1.min.js"></script>
     <script src="/js/jquery.tablesorter.min.js"></script>
-    <script type="text/javascript">
+    <script>
         $(document).ready(function () {
             $("#ccTable").tablesorter({
                 theme: 'grey',

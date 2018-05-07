@@ -28,7 +28,7 @@
                     <td>{{ $cc->phone_number }}</td>
                     <td>{{ $cc->street_address }}</td>
                     <td>{{ $emirates[$cc->emirate] }}</td>
-                    <td id='actions_column'>
+                    <td>
                         <a href='/manageCCs/{{ $cc->id }}/edit'><img class='actions_icon' src='/images/edit.png' alt='Edit Contact Center'></a>
                         <a href='/manageCCs/{{ $cc->id }}/delete'><img class='actions_icon' src='/images/delete.png' alt='Delete Contact Center'></a>
                     </td>
@@ -45,7 +45,7 @@
     <link href='/css/theme.grey.min.css' type='text/css' rel='stylesheet'>
     <script src="/js/jquery-3.2.1.min.js"></script>
     <script src="/js/jquery.tablesorter.min.js"></script>
-    <script type="text/javascript">
+    <script>
         $(document).ready(function () {
             $("#ccTable").tablesorter({
                 theme: 'grey',

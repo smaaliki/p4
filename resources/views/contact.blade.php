@@ -19,7 +19,7 @@
         {{ csrf_field() }}
 
         <div class="form-group">
-            <label for="Name">Name: </label>
+            <label for="name">Name: </label>
             <input type="text" class="form-control" id="name" placeholder="Your name" name="name" required>
         </div>
 
@@ -30,7 +30,7 @@
 
         <div class="form-group">
             <label for="message">Message: </label>
-            <textarea type="text" class="form-control luna-message" id="message" placeholder="Type your message here" name="message" required></textarea>
+            <textarea class="form-control luna-message" id="message" placeholder="Type your message here" name="message" required></textarea>
         </div>
 
         <div class="form-group">
