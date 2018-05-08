@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Employee;
+use App\ContactCenter;
 
 class EmployeeController extends Controller
 {
     /* Show the list of employees*/
     public function index()
     {
-        $employees = Employee::orderBy('last_name')->get();
+        $employees = Employee::with('contactcenter')->get();
+        //$employees = Employee::orderBy('last_name')->get();
 
         return view('employees.manageEmployees')->with([
             'employees' => $employees,
@@ -20,7 +22,11 @@ class EmployeeController extends Controller
     /* Show the form to add a new employee */
     public function create()
     {
-        return view('employees.create');
+        $ccs = ContactCenter::orderBy('name')->get();
+
+        return view('employees.create')->with([
+            'ccs' => $ccs
+        ]);
     }
 
     /* Process the addition of the new employee */
@@ -32,6 +38,7 @@ class EmployeeController extends Controller
             'birthYear' => 'nullable|numeric|digits:4',
             'employmentDate' => 'required',
         ]);
+        $cc = ContactCenter::where('id', '=', $request->contactcenter)->first();
 
         # Save the employee to the database
         $employee = new Employee();
@@ -42,18 +49,21 @@ class EmployeeController extends Controller
         $employee->birth_year = $request->birthYear;
         $employee->employment_date = $request->employmentDate;
         $employee->termination_date = $request->terminationDate;
+        $employee->contactCenter()->associate($cc);// = $cc->id;
         $employee->save();
 
         # Send the user back to the page to add an employee; include the title as part of the redirect
         # so we can display a confirmation message on that page
         return redirect('/manageEmployees/create')->with([
-            'alert' => 'The employee ' . $employee ->first_name . ' ' . $employee ->last_name . ' was added.'
+            'alert' => 'The employee ' . $employee->first_name . ' ' . $employee->last_name . ' was added.'
         ]);
     }
 
     /* Show the form to edit an employee */
     public function edit($id)
     {
+        $ccs = ContactCenter::orderBy('name')->get();
+
         # Find the employee center the visitor is requesting to edit
         $employee = Employee::find($id);
 
@@ -67,13 +77,13 @@ class EmployeeController extends Controller
         # Show the contact employee edit form
         return view('employees.edit')->with([
             'employee' => $employee,
+            'ccs' => $ccs,
         ]);
     }
 
     /* Update the employee */
     public function update(Request $request, $id)
     {
-        //dd($request);
         $this->validate($request, [
             'firstName' => 'required',
             'lastName' => 'required',
@@ -81,8 +91,11 @@ class EmployeeController extends Controller
             'employmentDate' => 'required',
         ]);
 
-        # Fetch the contact employee we want to update
+        # Fetch the employee we want to update
         $employee = Employee::find($id);
+
+        # Find the contact center that the employee works for.
+        $contact_center = ContactCenter::where('id', '=', $request->contactcenter)->first();
 
         # Update data
         $employee->last_name = $request->lastName;
@@ -91,6 +104,7 @@ class EmployeeController extends Controller
         $employee->birth_year = $request->birthYear;
         $employee->employment_date = $request->employmentDate;
         $employee->termination_date = $request->terminationDate;
+        $employee->contactCenter()->associate($contact_center);//cc_id = $request->contactcenter;
         $employee->save();
 
         # Send the user back to the edit page in case they want to make more edits
@@ -118,9 +132,8 @@ class EmployeeController extends Controller
 
             return redirect('/employees')->with([
                 'employees' => $employees,
-                'alert' => 'The employee ' . $removedEmployee ->first_name . ' ' . $removedEmployee ->last_name . ' was removed',
+                'alert' => 'The employee ' . $removedEmployee->first_name . ' ' . $removedEmployee->last_name . ' was removed',
             ]);
         }
-
     }
 }

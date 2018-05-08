@@ -96,6 +96,17 @@
             </div>
         </div>
 
+        <div class="form-group row">
+            <label class='col-sm-10 col-form-label' for='contactcenter'>Contact Center</label>
+            <div class='col-sm-10'>
+                <select id='contactcenter' name='contactcenter' class='form-control'>
+                    @foreach($ccs as $key => $cc)
+                        <option value='{{ $cc->id }}' {{ (old('contactcenter', $employee->contact_center_id) == $cc->id) ? 'SELECTED' : '' }}>{{ $cc->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
         <button type='submit' class='btn btn-primary'>Save</button>
     </form>
 

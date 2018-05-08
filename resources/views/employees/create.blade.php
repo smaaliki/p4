@@ -100,6 +100,18 @@
             </div>
         </div>
 
+<!--Todo: Add a 'Make a Selection' to the list to forcethe user to actually think of which center teh employee works at-->
+        <div class="form-group row">
+            <label class='col-sm-10 col-form-label' for='contactcenter'>Contact Center</label>
+            <div class='col-sm-10'>
+                <select id='contactcenter' name='contactcenter' class='form-control'>
+                    @foreach($ccs as $key => $cc)
+                        <option value='{{ $cc->id }}' {{ (old('contactcenter', '0') == $cc->id) ? 'SELECTED' : '' }}>{{ $cc->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
         <button type='submit' class='btn btn-primary'>Add</button>
     </form>
 

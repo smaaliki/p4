@@ -121,6 +121,8 @@ class ContactCentersController extends Controller
 
     public function remove($id)
     {
+        //Todo: Ideally, we should never delete a CC.  It should be de-activated so that if in teh future we want to look at its data, we can still access it.
+
         $removedCC = ContactCenter::where('id', '=', $id)->first();
         $emirates = [1 => 'Abu Dhabi', 2 => 'Ajman', 3 => 'Dubai', 4 => 'Fujairah', 5 => 'Ras Al Kahimah', 6 => 'Sharjah', 7 => 'Umm Al Quwain',];
 
@@ -133,6 +135,9 @@ class ContactCentersController extends Controller
                 'alert' => 'The contact center was not found!',
             ]);
         } else {
+            # Before we delete the cc we have to delete any employee associations
+            $removedCC->employees()->delete();
+
             $removedCC->delete();
 
             $ccs = ContactCenter::orderBy('name')->get();

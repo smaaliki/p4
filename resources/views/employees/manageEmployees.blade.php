@@ -20,6 +20,7 @@
                 <th>Birth Year</th>
                 <th>Employment Date</th>
                 <th>Termination Date</th>
+                <th>Contact Center</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -32,6 +33,7 @@
                     <td>{{ $employee->birth_year }}</td>
                     <td>{{ $employee->employment_date }}</td>
                     <td>{{ $employee->termination_date }}</td>
+                    <td>{{ $employee->contactcenter->name }}</td>
                     <td>
                         <a href='/manageEmployees/{{ $employee->id }}/edit'><img class='actions_icon' src='/images/edit.png' alt='Edit Employee'></a>
                         <a href='/manageEmployees/{{ $employee->id }}/delete'><img class='actions_icon' src='/images/delete.png' alt='Deactivate Employee'></a>  <!-- Todo: Replace with a deactivate icon -->

@@ -12,6 +12,8 @@
 </head>
 <body>
 
+<!-- Todo: Can we make the alert appear temporarily? -->
+
 @if(session('alert'))
     <div class='flashAlert'>{{ session('alert') }}</div>
 @endif
@@ -21,7 +23,7 @@
         <a href='/'><img src='/images/logo.png' id='logo' alt='Contact Center Management System Logo'/></a>
     </div>
     <div class='username'>Samer Maaliki</div>
-    <div class='navigation'>/
+    <div class='navigation'>
         @include('modules.nav')
     </div>
 </header>
