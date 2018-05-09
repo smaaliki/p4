@@ -60,9 +60,9 @@
             <input class="form-check-input"
                    type='checkbox'
                    name='services[]'
-                   id="inlineRadio1"
+                   id= {{'inlineRadio'.$serviceId}}
                    value='{{ $serviceId }}' {{ (in_array($serviceId, $services)) ? 'checked' : '' }}>
-            <label class="form-check-label" for="inlineRadio1">{{ $serviceName }}</label>
+            <label class="form-check-label" for={{'inlineRadio'.$serviceId}}>{{ $serviceName }}</label>
         </div>
     @endforeach
 </div>

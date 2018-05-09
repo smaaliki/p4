@@ -12,7 +12,6 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::with('contactcenter')->get();
-        //$employees = Employee::orderBy('last_name')->get();
 
         return view('employees.manageEmployees')->with([
             'employees' => $employees,
