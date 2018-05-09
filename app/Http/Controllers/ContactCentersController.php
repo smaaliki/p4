@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ContactCenter;
+use App\Service;
 
 class ContactCentersController extends Controller
 {
@@ -40,7 +41,9 @@ class ContactCentersController extends Controller
 
         return view('contactcenters.create')->with([
             'emirates' => $emirates,
-        ]);
+            'servicesForCheckboxes' => Service::getForCheckboxes(),
+            'services' =>  [],
+            ]);
     }
 
     public function store(Request $request)
@@ -58,8 +61,7 @@ class ContactCentersController extends Controller
         $cc->phone_number = $request->phoneNumber;
         $cc->save();
 
-        # Logging code just as proof of concept that this method is being invoked
-        # Log::info('Add the contact center ' . $cc->title);
+        $cc->services()->sync($request->input('services'));
 
         # Send the user back to the page to add a contact center; include the title as part of the redirect
         # so we can display a confirmation message on that page
@@ -74,9 +76,9 @@ class ContactCentersController extends Controller
     public function edit($id)
     {
         # Find the contact center the visitor is requesting to edit
-        $cc = ContactCenter::find($id);
-
-        $emirates = [1 => 'Abu Dhabi', 2 => 'Ajman', 3 => 'Dubai', 4 => 'Fujairah', 5 => 'Ras Al Kahimah', 6 => 'Sharjah', 7 => 'Umm Al Quwain',];
+       // $cc = ContactCenter::find($id);
+        # Get this book and eager load its tags
+        $cc = ContactCenter::with('services')->find($id);
 
         # Handle the case where we can't find the given contact center
         if (!$cc) {
@@ -85,10 +87,15 @@ class ContactCentersController extends Controller
             );
         }
 
+        #Todo: Can this be turned into a relationship, like the services? Do we want to if the emirates will never change?  Otherwise, can we make this a global variable?
+        $emirates = [1 => 'Abu Dhabi', 2 => 'Ajman', 3 => 'Dubai', 4 => 'Fujairah', 5 => 'Ras Al Kahimah', 6 => 'Sharjah', 7 => 'Umm Al Quwain',];
+
         # Show the contact center edit form
         return view('contactcenters.edit')->with([
             'cc' => $cc,
             'emirates' => $emirates,
+            'servicesForCheckboxes' => Service::getForCheckboxes(),
+            'services' =>  $cc->services()->pluck('services.id')->toArray(),
         ]);
     }
 
@@ -98,10 +105,17 @@ class ContactCentersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        # Custom validation messages
+        # Todo: this is not working. Why?
+        $messages = [
+            'ccName.required' => 'The Contact Center Name field is required.',
+            'phoneNumber.required' => 'The cc Phone Number field is required.',
+        ];
+
         $this->validate($request, [
             'ccName' => 'required',
             'phoneNumber' => 'required',
-        ]);
+        ], $messages);
 
         # Fetch the contact center we want to update
         $cc = ContactCenter::find($id);
@@ -111,6 +125,11 @@ class ContactCentersController extends Controller
         $cc->street_address = $request->address;
         $cc->emirate = $request->emirate ? $request->emirate: ' ';
         $cc->phone_number = $request->phoneNumber;
+
+        # Sync the services
+        $cc->services()->sync($request->input('services'));
+
+        # Save
         $cc->save();
 
         # Send the user back to the edit page in case they want to make more edits
@@ -137,6 +156,9 @@ class ContactCentersController extends Controller
         } else {
             # Before we delete the cc we have to delete any employee associations
             $removedCC->employees()->delete();
+
+            # Before we delete the cc we have to delete any employee associations
+            $removedCC->services()->detach();
 
             $removedCC->delete();
 

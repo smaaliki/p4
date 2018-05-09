@@ -68,6 +68,20 @@
             </div>
         </div>
 
+        <div class="form-group row">
+            <label class='col-sm-10 col-form-label'>Services</label>
+            @foreach($servicesForCheckboxes as $serviceId => $serviceName)
+                <div class="col-sm-3 form-check form-check-inline">
+                    <input class="form-check-input"
+                           type='checkbox'
+                           name='services[]'
+                           id="inlineRadio1"
+                           value='{{ $serviceId }}' {{ (in_array($serviceId, $services)) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="inlineRadio1">{{ $serviceName }}</label>
+                </div>
+            @endforeach
+        </div>
+
         <button type='submit' class='btn btn-primary'>Save</button>
     </form>
 
