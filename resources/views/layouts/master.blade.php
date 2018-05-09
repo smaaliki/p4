@@ -13,7 +13,6 @@
 <body>
 
 <!-- Todo: Can we make the alert appear temporarily? -->
-
 @if(session('alert'))
     <div class='flashAlert'>{{ session('alert') }}</div>
 @endif
@@ -22,7 +21,7 @@
     <div class='logo'>
         <a href='/'><img src='/images/logo.png' id='logo' alt='Contact Center Management System Logo'/></a>
     </div>
-    <div class='username'>Samer Maaliki</div>
+<!--    <div class='username'>Login</div> -->
     <div class='navigation'>
         @include('modules.nav')
     </div>
@@ -35,9 +34,6 @@
 <footer>
     &copy; {{ date('Y') }} - Maaliki Corp
 </footer>
-
-<!--Todo: do we need this-->
-{{--<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>--}}
 
 @stack('body')
 
