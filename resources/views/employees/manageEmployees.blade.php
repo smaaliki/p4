@@ -36,7 +36,8 @@
                     <td>{{ $employee->contactcenter->name }}</td>
                     <td>
                         <a href='/manageEmployees/{{ $employee->id }}/edit'><img class='actions_icon' src='/images/edit.png' alt='Edit Employee'></a>
-                        <a href='/manageEmployees/{{ $employee->id }}/delete'><img class='actions_icon' src='/images/delete.png' alt='Deactivate Employee'></a>  <!-- Todo: Replace with a deactivate icon -->
+                        <!-- Todo: Replace with a deactivate icon once the deactivation action is enabled -->
+                        <a href='/manageEmployees/{{ $employee->id }}/delete'><img class='actions_icon' src='/images/delete.png' alt='Delete Employee'></a>
                     </td>
                 </tr>
             @endforeach

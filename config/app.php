@@ -20,7 +20,7 @@ return [
         '/' => 'Home',
         '/ccs' => 'Our CCs',
         '/manageCCs' => 'Manage CCs',
-        '/employees' => 'Manage Employees',
+        '/employees' => 'Employees',
 /*        '/calculators' => 'Calculators',*/
         '/contact' => 'Contact Us',
     ],

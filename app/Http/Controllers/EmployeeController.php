@@ -25,31 +25,40 @@ class EmployeeController extends Controller
         $ccs = ContactCenter::orderBy('name')->get();
 
         return view('employees.create')->with([
-            'ccs' => $ccs
+            'ccs' => $ccs,
+            'employee' => new Employee(),
         ]);
     }
 
     /* Process the addition of the new employee */
     public function store(Request $request)
     {
+        $messages = [
+            'firstName.required' => 'The First Name is required',
+            'lastName.required' => 'The Last Name is required',
+            'birthYear.numeric' => 'Birth Year can only consist of number digits',
+            'birthYear.digits' => 'Birth Year must consist of 4 digits',
+            'employmentDate.required' => 'Employment Date is required'
+        ];
+
         $this->validate($request, [
             'firstName' => 'required',
             'lastName' => 'required',
             'birthYear' => 'nullable|numeric|digits:4',
             'employmentDate' => 'required',
-        ]);
+        ], $messages);
+
         $cc = ContactCenter::where('id', '=', $request->contactcenter)->first();
 
         # Save the employee to the database
         $employee = new Employee();
-        # Update data
         $employee->last_name = $request->lastName;
         $employee->first_name = $request->firstName;
         $employee->gender = $request->gender;
         $employee->birth_year = $request->birthYear;
         $employee->employment_date = $request->employmentDate;
         $employee->termination_date = $request->terminationDate;
-        $employee->contactCenter()->associate($cc);// = $cc->id;
+        $employee->contactCenter()->associate($cc);
         $employee->save();
 
         # Send the user back to the page to add an employee; include the title as part of the redirect
@@ -84,12 +93,20 @@ class EmployeeController extends Controller
     /* Update the employee */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'firstName.required' => 'The First Name is required',
+            'lastName.required' => 'The Last Name is required',
+            'birthYear.numeric' => 'Birth Year can only consist of number digits',
+            'birthYear.digits' => 'Birth Year must consist of 4 digits',
+            'employmentDate.required' => 'Employment Date is required'
+        ];
+
         $this->validate($request, [
             'firstName' => 'required',
             'lastName' => 'required',
             'birthYear' => 'nullable|numeric|digits:4',
             'employmentDate' => 'required',
-        ]);
+        ], $messages);
 
         # Fetch the employee we want to update
         $employee = Employee::find($id);

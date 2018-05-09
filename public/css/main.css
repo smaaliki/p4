@@ -135,13 +135,12 @@ footer {
 }
 
 .phone_num:before {
-    content: "Phone: ";
     font-weight: bold;
     /*Todo: look into why this is not working */
-    background-image: url('/public/images/phone.png');
+    /*background-image: url('/public/images/phone.png');
     background-position: left;
     background-repeat: no-repeat;
-    padding-left: 30px;
+    padding-left: 30px;*/
 }
 
 .details {

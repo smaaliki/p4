@@ -42,22 +42,28 @@ class ContactCentersController extends Controller
         return view('contactcenters.create')->with([
             'emirates' => $emirates,
             'servicesForCheckboxes' => Service::getForCheckboxes(),
-            'services' =>  [],
-            ]);
+            'services' => [],
+            'cc' => new ContactCenter(),
+        ]);
     }
 
     public function store(Request $request)
     {
+        $messages = [
+            'ccName.required' => 'The Name field is required.',
+            'phoneNumber.required' => 'The Phone Number field is required.',
+        ];
+
         $this->validate($request, [
             'ccName' => 'required',
             'phoneNumber' => 'required',
-        ]);
+        ], $messages);
 
         # Save the contact center to the database
         $cc = new ContactCenter();
         $cc->name = $request->ccName;
         $cc->street_address = $request->address;
-        $cc->emirate = $request->emirate ? $request->emirate: ' ';
+        $cc->emirate = $request->emirate ? $request->emirate : ' ';
         $cc->phone_number = $request->phoneNumber;
         $cc->save();
 
@@ -75,9 +81,7 @@ class ContactCentersController extends Controller
      */
     public function edit($id)
     {
-        # Find the contact center the visitor is requesting to edit
-       // $cc = ContactCenter::find($id);
-        # Get this book and eager load its tags
+        # Get this cc and eager load its services
         $cc = ContactCenter::with('services')->find($id);
 
         # Handle the case where we can't find the given contact center
@@ -95,7 +99,7 @@ class ContactCentersController extends Controller
             'cc' => $cc,
             'emirates' => $emirates,
             'servicesForCheckboxes' => Service::getForCheckboxes(),
-            'services' =>  $cc->services()->pluck('services.id')->toArray(),
+            'services' => $cc->services()->pluck('services.id')->toArray(),
         ]);
     }
 
@@ -106,10 +110,9 @@ class ContactCentersController extends Controller
     public function update(Request $request, $id)
     {
         # Custom validation messages
-        # Todo: this is not working. Why?
         $messages = [
-            'ccName.required' => 'The Contact Center Name field is required.',
-            'phoneNumber.required' => 'The cc Phone Number field is required.',
+            'ccName.required' => 'The Name field is required.',
+            'phoneNumber.required' => 'The Phone Number field is required.',
         ];
 
         $this->validate($request, [
@@ -123,7 +126,7 @@ class ContactCentersController extends Controller
         # Update data
         $cc->name = $request->ccName;
         $cc->street_address = $request->address;
-        $cc->emirate = $request->emirate ? $request->emirate: ' ';
+        $cc->emirate = $request->emirate ? $request->emirate : ' ';
         $cc->phone_number = $request->phoneNumber;
 
         # Sync the services
@@ -167,9 +170,8 @@ class ContactCentersController extends Controller
             return redirect('/manageCCs')->with([
                 'ccs' => $ccs,
                 'emirates' => $emirates,
-                'alert' => 'The contact center ' . $removedCC ->name . ' was removed',
-                ]);
+                'alert' => 'The contact center ' . $removedCC->name . ' was removed',
+            ]);
         }
-
     }
 }
