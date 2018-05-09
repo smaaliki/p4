@@ -60,3 +60,5 @@ For addressing the date input support:
 The idea for this website is to eventually create a publicly accessible website for residents to view a list of contact centers.  The contact centers would be managed by a super admin who would login to add and manage the contact centers at a high level.  There would also be contact center admins who can only access info related to their contact centers and manage the employees within it.
 
 I used the one to many relationship between contact centers and employees. The pivot table use was between the contact centers and the types of services that they offer.
+
+There is a known issue with the date input type that is used in the employee create and edit pages.  W3 suggests to use a polyfill. I tested it and the inputs work fine in Chrome and Safari.  They do not work gracefully in Edge or Explorer.  I did some research (Modernizr, HTML5Forms, Web Fundamentals), but I will need to do some reading about this subject.  This will need to be addressed in a future release.   
