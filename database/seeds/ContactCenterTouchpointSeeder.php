@@ -15,15 +15,14 @@ class ContactCenterTouchpointSeeder extends Seeder
     {
         /*Todo: this seeder is not working */
         $ccs = [
-            'Municipality Contact Center' => ['Inbound Informational Calls', 'Inbound Transactional Calls', 'Email', 'Webchat', 'Social Media','Informational IVR Calls'],
+            'Municipality Contact Center' => ['Inbound Informational Calls', 'Inbound Transactional Calls', 'Email', 'Webchat', 'Social Media', 'Informational IVR Calls'],
             'Department of Motor Vehicles' => ['Inbound Informational Calls', 'Outbound Calls', 'Email', 'Social Media'],
-            'Engineering Department' => ['Inbound Informational Calls', 'Inbound Transactional Calls', 'Email','Informational IVR Calls'],
-            'Water and Sewage' => ['Inbound Informational Calls', 'Inbound Transactional Calls', 'Outbound Calls','Email','Informational IVR Calls'],
+            'Engineering Department' => ['Inbound Informational Calls', 'Inbound Transactional Calls', 'Email', 'Informational IVR Calls'],
+            'Water and Sewage' => ['Inbound Informational Calls', 'Inbound Transactional Calls', 'Outbound Calls', 'Email', 'Informational IVR Calls'],
         ];
 
         # Now loop through the above array, creating a new pivot for each contact center to service
         foreach ($ccs as $name => $touchpoints) {
-
             # First get the contact center
             $cc = ContactCenter::where('name', 'like', $name)->first();
 
@@ -35,4 +34,5 @@ class ContactCenterTouchpointSeeder extends Seeder
                 $cc->touchpoints()->save($touchpoint);
             }
         }
+    }
 }
