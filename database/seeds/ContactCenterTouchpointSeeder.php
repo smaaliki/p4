@@ -13,7 +13,6 @@ class ContactCenterTouchpointSeeder extends Seeder
      */
     public function run()
     {
-        /*Todo: this seeder is not working */
         $ccs = [
             'Municipality Contact Center' => ['Inbound Informational Calls', 'Inbound Transactional Calls', 'Email', 'Webchat', 'Social Media', 'Informational IVR Calls'],
             'Department of Motor Vehicles' => ['Inbound Informational Calls', 'Outbound Calls', 'Email', 'Social Media'],

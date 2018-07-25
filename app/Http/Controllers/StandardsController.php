@@ -34,7 +34,7 @@ class StandardsController extends Controller
         $crm = true; //Todo: This needs to be acquired from CC info, for now we will assume that it is true
 
         //Todo: This section needs to be run once for now.  Once we add Standards management, we need to remove the rankings calculation from this function
-        /*foreach ($focus_areas as $focus_area) {
+        foreach ($focus_areas as $focus_area) {
             //dump('Focus Area = '. $focus_area->id);
             //$rankings = Standard::where('focus_area_id', '=', $focus_area->id)->pluck('std_ranking');
             $rankings = $standards->where('focus_area_id', $focus_area->id)->pluck('std_ranking');
@@ -62,7 +62,7 @@ class StandardsController extends Controller
                 $standard->save();
             }
         }
-*/
+
         $ccs = 0;
         foreach($perspectives as $perspective)
         {
