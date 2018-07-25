@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ContactCenter;
 use App\Service;
+use App\Touchpoint;
 
 class ContactCentersController extends Controller
 {
@@ -43,6 +44,8 @@ class ContactCentersController extends Controller
             'emirates' => $emirates,
             'servicesForCheckboxes' => Service::getForCheckboxes(),
             'services' => [],
+            'touchpointsForCheckboxes' => Touchpoint::getForCheckboxes(),
+            'touchpoints' => [],
             'cc' => new ContactCenter(),
         ]);
     }
@@ -68,6 +71,7 @@ class ContactCentersController extends Controller
         $cc->save();
 
         $cc->services()->sync($request->input('services'));
+        $cc->touchpoints()->sync($request->input('touchpoints'));
 
         # Send the user back to the page to add a contact center; include the title as part of the redirect
         # so we can display a confirmation message on that page
@@ -100,6 +104,8 @@ class ContactCentersController extends Controller
             'emirates' => $emirates,
             'servicesForCheckboxes' => Service::getForCheckboxes(),
             'services' => $cc->services()->pluck('services.id')->toArray(),
+            'touchpointsForCheckboxes' => Touchpoint::getForCheckboxes(),
+            'touchpoints' => $cc->touchpoints()->pluck('touchpoints.id')->toArray(),
         ]);
     }
 
@@ -132,6 +138,9 @@ class ContactCentersController extends Controller
         # Sync the services
         $cc->services()->sync($request->input('services'));
 
+        # Sync the touchpoints
+        $cc->touchpoints()->sync($request->input('touchpoints'));
+
         # Save
         $cc->save();
 
@@ -162,6 +171,7 @@ class ContactCentersController extends Controller
 
             # Before we delete the cc we have to delete any employee associations
             $removedCC->services()->detach();
+            $removedCC->touchpoints()->detach();
 
             $removedCC->delete();
 

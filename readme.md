@@ -52,6 +52,8 @@ For form elements:
 For addressing the date input support:
 <https://codepen.io/mikedryan/pen/EjWNKj>
 
+For the Menu:
+<https://github.com/spatie/laravel-menu>
 
 ## Code style divergences
 *None*

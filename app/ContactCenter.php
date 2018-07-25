@@ -18,4 +18,10 @@ class ContactCenter extends Model
         # withTimestamps will ensure the pivot table has its created_at/updated_at fields automatically maintained
         return $this->belongsToMany('App\Service')->withTimestamps();
     }
+
+    public function touchpoints()
+    {
+        # withTimestamps will ensure the pivot table has its created_at/updated_at fields automatically maintained
+        return $this->belongsToMany('App\Touchpoint')->withTimestamps();
+    }
 }

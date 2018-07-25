@@ -16,13 +16,26 @@ return [
     |--------------------------------------------------------------------------
     |
      */
+
+    # Guest navigation links
     'nav' => [
         '/' => 'Home',
         '/ccs' => 'Our CCs',
-        '/manageCCs' => 'Manage CCs',
-        '/employees' => 'Employees',
-/*        '/calculators' => 'Calculators',*/
+        '/register' => 'Register',
+        '/login' => 'Login',
         '/contact' => 'Contact Us',
+    ],
+
+    # Logged-in user navigation links
+    'nav1' => [
+        '/' => 'Home',
+        '/manageCCs/3/edit' => 'CC Info',
+        /*'/ccs' => 'Our CCs',
+        '/manageCCs' => 'Manage CCs',
+        /*'/employees' => 'Employees',
+                '/calculators' => 'Calculators',*/
+        '/standards' => 'Self Assessment',
+        //'/contact' => 'Contact Us',
     ],
 
     /*
@@ -182,7 +195,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        App\Providers\ViewServiceProvider::class,
     ],
 
     /*

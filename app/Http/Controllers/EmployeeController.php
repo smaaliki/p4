@@ -70,6 +70,7 @@ class EmployeeController extends Controller
     /* Show the form to edit an employee */
     public function edit($id)
     {
+        /*Todo: rename this to cc */
         $ccs = ContactCenter::orderBy('name')->get();
 
         # Find the employee center the visitor is requesting to edit

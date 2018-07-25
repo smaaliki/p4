@@ -11,37 +11,65 @@
 |
 */
 
-Route::get('/',  'PageController@index');
+Route::get('/', 'PageController@index');
 
 Route::get('/contact', 'ContactController@show');
-Route::post('/contact',  'ContactController@mailToAdmin');
+Route::post('/contact', 'ContactController@mailToAdmin');
 
 /* Contact centers */
 Route::get('/ccs', 'ContactCentersController@index');
-Route::get('/manageCCs', 'ContactCentersController@manageCCs');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/manageCCs', 'ContactCentersController@manageCCs');
 
-/* CC - Create */
-Route::get('/manageCCs/create', 'ContactCentersController@create');
-Route::post('/manageCCs/store', 'ContactCentersController@store');
+    Route::get('/homeCC', 'ContactCentersController@home');
 
-/* CC - Edit */
-Route::get('/manageCCs/{id}/edit', 'ContactCentersController@edit');
-Route::put('/manageCCs/{id}', 'ContactCentersController@update');
 
-/* CC - Delete */
-Route::get('/manageCCs/{id}/delete', 'ContactCentersController@remove');
+    /* CC - Create */
+    Route::get('/manageCCs/create', 'ContactCentersController@create');
+    Route::post('/manageCCs/store', 'ContactCentersController@store');
 
-/* Employees */
-Route::get('/employees', 'EmployeeController@index');
+    /* CC - Edit */
+    Route::get('/manageCCs/{id}/edit', 'ContactCentersController@edit');
+    Route::put('/manageCCs/{id}', 'ContactCentersController@update');
 
-/* CC - Create */
-Route::get('/manageEmployees/create', 'EmployeeController@create');
-Route::post('/manageEmployees/store', 'EmployeeController@store');
+    /* CC - Delete */
+    Route::get('/manageCCs/{id}/delete', 'ContactCentersController@remove');
 
-/* Employees - Edit */
-Route::get('/manageEmployees/{id}/edit', 'EmployeeController@edit');
-Route::put('/manageEmployees/{id}', 'EmployeeController@update');
+    /* Employees */
+    Route::get('/employees', 'EmployeeController@index');
 
-/* Employees - Delete */
-Route::get('/manageEmployees/{id}/delete', 'EmployeeController@remove');
+    /* Employees - Create */
+    Route::get('/manageEmployees/create', 'EmployeeController@create');
+    Route::post('/manageEmployees/store', 'EmployeeController@store');
 
+    /* Employees - Edit */
+    Route::get('/manageEmployees/{id}/edit', 'EmployeeController@edit');
+    Route::put('/manageEmployees/{id}', 'EmployeeController@update');
+
+    /* Employees - Delete */
+    Route::get('/manageEmployees/{id}/delete', 'EmployeeController@remove');
+
+    /* Standards */
+    Route::get('/standards', 'StandardsController@index');
+
+    /* Standards - calculate */
+    Route::post('/standards/calculate', 'StandardsController@calculate');
+
+    /* Standards - reset */
+    Route::get('/standards/reset', 'StandardsController@reset');
+
+
+});
+
+Auth::routes();
+
+Route::get('/show-login-status', function () {
+    $user = Auth::user();
+    if ($user) {
+        dump('You are logged in.', $user->toArray());
+    } else {
+        dump('You are not logged in.');
+    }
+
+    return;
+});

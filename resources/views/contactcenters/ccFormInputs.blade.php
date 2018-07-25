@@ -54,6 +54,20 @@
 </div>
 
 <div class="form-group row">
+    <label class='col-sm-10 col-form-label'>Touchpoints</label>
+    @foreach($touchpointsForCheckboxes as $touchpointId => $touchpointName)
+        <div class="col-sm-3 form-check form-check-inline">
+            <input class="form-check-input"
+                   type='checkbox'
+                   name='touchpoints[]'
+                   id= {{'inlineRadio'.$touchpointId}}
+                   value='{{ $touchpointId }}' {{ (in_array($touchpointId, $touchpoints)) ? 'checked' : '' }}>
+            <label class="form-check-label" for={{'inlineRadio'.$touchpointId}}>{{ $touchpointName }}</label>
+        </div>
+    @endforeach
+</div>
+
+<div class="form-group row">
     <label class='col-sm-10 col-form-label'>Services</label>
     @foreach($servicesForCheckboxes as $serviceId => $serviceName)
         <div class="col-sm-3 form-check form-check-inline">
@@ -61,7 +75,7 @@
                    type='checkbox'
                    name='services[]'
                    id= {{'inlineRadio'.$serviceId}}
-                   value='{{ $serviceId }}' {{ (in_array($serviceId, $services)) ? 'checked' : '' }}>
+                           value='{{ $serviceId }}' {{ (in_array($serviceId, $services)) ? 'checked' : '' }}>
             <label class="form-check-label" for={{'inlineRadio'.$serviceId}}>{{ $serviceName }}</label>
         </div>
     @endforeach
