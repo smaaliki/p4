@@ -13,10 +13,10 @@ class ContactCentersTableSeeder extends Seeder
     {
         # Array of CC data to add
         $ccs = [
-            ['Municipality Contact Center', '', 1, '8009091'],
-            ['Department of Motor Vehicles', '123 Main Street', 1, '9001234567'],
-            ['Engineering Department', '', 2, '6171234567'],
-            ['Water and Sewage', '987 Commonwealth Avenue', 3, '7811234567']
+            ['Municipality Contact Center', '', 1, '8009091', 0],
+            ['Department of Motor Vehicles', '123 Main Street', 1, '9001234567', 1],
+            ['Engineering Department', '', 2, '6171234567', 1],
+            ['Water and Sewage', '987 Commonwealth Avenue', 3, '7811234567', 1]
         ];
         $count = count($ccs);
 
@@ -30,6 +30,7 @@ class ContactCentersTableSeeder extends Seeder
             $cc->street_address = $ccData[1];
             $cc->emirate = $ccData[2];
             $cc->phone_number = $ccData[3];
+            $cc->crm = $ccData[4];
 
             $cc->save();
 

@@ -249,9 +249,9 @@
             <thead>
             <tr>
                 <th>Focus Area</th>
-                <th>Achieved</th>
-                <th>Weight</th>
-                <th>Result</th>
+                <th align='right'>Achieved</th>
+                <th align='right'>Weight</th>
+                <th align='right'>Result</th>
             </tr>
             </thead>
             <tbody>

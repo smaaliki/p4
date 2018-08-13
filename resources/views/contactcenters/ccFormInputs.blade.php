@@ -80,3 +80,15 @@
         </div>
     @endforeach
 </div>
+
+<div class="form-group row">
+    <label class='col-sm-10 col-form-label'></label>
+        <div class="col-sm-4 form-check form-check-inline">
+            <input class="form-check-input"
+                   type='checkbox'
+                   name='crm'
+                   id= 'crm'
+                   value='{{ old('crm', $cc->crm) }}' {{ $cc->crm ? 'checked' : '' }}>
+            <label class="form-check-label" for='crm'> We use a CRM system at our contact center</label>
+        </div>
+</div>

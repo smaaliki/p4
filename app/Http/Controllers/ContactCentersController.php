@@ -68,6 +68,8 @@ class ContactCentersController extends Controller
         $cc->street_address = $request->address;
         $cc->emirate = $request->emirate ? $request->emirate : ' ';
         $cc->phone_number = $request->phoneNumber;
+        $cc->crm = $request->crm;
+
         $cc->save();
 
         $cc->services()->sync($request->input('services'));
@@ -134,6 +136,7 @@ class ContactCentersController extends Controller
         $cc->street_address = $request->address;
         $cc->emirate = $request->emirate ? $request->emirate : ' ';
         $cc->phone_number = $request->phoneNumber;
+        $cc->crm = isset($request->crm) ? 1 : 0;
 
         # Sync the services
         $cc->services()->sync($request->input('services'));
