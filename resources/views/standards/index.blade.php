@@ -9,7 +9,8 @@
 
     @if(count($standards) > 0)
 
-<p> Your CC Score is {{$ccs}} </p>
+        @include('modules.error-form')
+        <p> Your CC Score is {{$ccs}} </p>
 
         <form method='POST' action='/standards/calculate'>
         {{ csrf_field() }}
@@ -36,11 +37,11 @@
 
                 @endforeach
             </ul>
+            <!--Show the standards -->
             <div class="tab-content" id="myTabContent">
                 @foreach($perspectives as $count => $perspective)
                     <div @if($count == 0) class="tab-pane fade show active" @else class="tab-pane fade" @endif
-                         id="{{ $perspective->id }}" role="tabpanel" aria-labelledby="{{ $perspective->id }}-tab">
-                        <h3>{{$perspective->pillar->abbreviation}} - {{ $perspective->name }}</h3>
+                        id="{{ $perspective->id }}" role="tabpanel" aria-labelledby="{{ $perspective->id }}-tab">
                         @foreach ($focus_areas as $focus_area)
                             @if($focus_area->perspective_id == $perspective->id)
 
@@ -48,9 +49,11 @@
                                     {{ $focus_area->fa_id . ' ' . $focus_area->name }}
                                 </h4>
                                 @if(($focus_area->id <10) && (!$touchpoints[$focus_area->id]))
-                                <p>This focus area is not applicable. </p>
+                                    <p>This focus area is not applicable. </p>
+                                @elseif(($focus_area->id == 12) && (!$crm))
+                                    <p>This focus area is not applicable. </p>
                                 @else
-                                <table class="table">
+                                    <table class="table">
                                     <?php /*<caption>
                                         {{ $focus_area->fa_id . ' ' . $focus_area->name }}
                                     </caption> */ ?>
@@ -116,6 +119,7 @@
                                                 @else
                                                     <td></td>
                                                 @endif
+                                                <td>@include('modules.error-field', ['field' => "{{'achieved'.str_replace('.', '_',  $standard->std_num) }}"])</td>
                                             </tr>
                                         @endif
                                     @endforeach
@@ -242,6 +246,7 @@
         </form>
         <a class='add_new_cc' href='/standards/reset'>Reset</a>
 */ ?>
+        <!--Show the results -->
         <table class="table">
             <caption>
                 Results
@@ -288,7 +293,7 @@
             </tbody>
         </table>
 
-        @include('modules.error-form')
+
     @endif
 @endsection
 
@@ -296,13 +301,4 @@
     <link href='/css/theme.grey.min.css' type='text/css' rel='stylesheet'>
     <script src="/js/jquery-3.2.1.min.js"></script>
     <script src="/js/jquery.tablesorter.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#stdTable").tablesorter({
-                theme: 'grey',
-                widgets: ['zebra'],
-                sortList: [[0, 0]]
-            });
-        });
-    </script>
 @endpush

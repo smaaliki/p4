@@ -78,16 +78,23 @@ class StandardsController extends Controller
 
     public function calculate(Request $request)
     {
-        //Todo: validation.
-        /*        $messages = [
-                    'achieved.*' => 'All fields must be numeric',
-                ];
-
-                $this->validate($request, [
-                    'achieved.*' => 'numeric',
-                ],$messages);*/
-
+        //Load up the standards
         $standards = Standard::get();
+
+        //Validate the entred data. All non-binary (Yes or No) standards and indicators must be numeric and they are optional (nullable).
+        $rules = array();
+        $customMessages = array();
+        foreach($standards as $key =>$standard) {
+            //Validation should only apply to non-absolute standards and indicators (i.e. not YES or No standards and indicators)
+            if ($standard->target_type != 0) {
+                $rules['achieved' . str_replace('.', '_', $standard->std_num)] = 'numeric|nullable';
+                $customMessages['achieved' . str_replace('.', '_', $standard->std_num).'.numeric'] =
+                    'The '. $standard->std_num.' entered value has text in it.  It must be a number.';
+            }
+        }
+
+        $this->validate($request, $rules, $customMessages);
+
         $focus_areas = FocusArea::get();
         $perspectives = Perspective::get();
 
